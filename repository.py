@@ -1,5 +1,5 @@
 from sqlalchemy import select
-from db import new_session, TaskTable
+from core.db.sqlite.crud.db import new_session, TaskTable
 from api.models.schemas import TaskAdd, TasksOut
 
 

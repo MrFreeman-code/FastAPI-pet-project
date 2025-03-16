@@ -8,6 +8,7 @@ from typing import Annotated
 # prefix у всей группы роутов будет одинаковый, и в tags прописываем название группый роутов
 router = APIRouter(prefix="/tasks", tags=["Tasks"])
 
+
 # Добавляется async, тк работа с БД в асинхронном режиме и ф-ии тоже долны быть асинхронны
 @router.post("")
 async def add_task(
