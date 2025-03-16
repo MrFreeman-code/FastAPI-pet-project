@@ -31,6 +31,7 @@ class RedirectToDocsMiddleware(BaseHTTPMiddleware):
         response = await call_next(request)
         return response
 
+
 # Cтрока добавляет middleware RedirectToDocsMiddleware в приложение FastAPI, которое автоматически перенаправляет пользователей с корневого адреса на страницу документации FastAPI.
 app.add_middleware(RedirectToDocsMiddleware)
 
