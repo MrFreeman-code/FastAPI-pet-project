@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager # asynccontextmanager — это декоратор из модуля contextlib в Python, который позволяет создавать асинхронные контекстные менеджеры.
-from core.db.sqlite.crud.db import create_tables, delete_tables
-from api.routers.router import router as tasks_router
+from core.db.sqlite.session import create_tables, delete_tables
+from api.routers.task import router as tasks_router
 
 from starlette.responses import RedirectResponse
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -12,11 +12,11 @@ from starlette.middleware.base import BaseHTTPMiddleware
 async def lifespan(app: FastAPI):
     # await тк у нас асинхронное создание
     await delete_tables()
-    print("БД очищена")
+    print("Drop table task")
     await create_tables()
-    print("БД создана и готова к работе")
+    print("Create table task")
     yield
-    print("Выклюение")
+    print("Shutdown")
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(tasks_router)

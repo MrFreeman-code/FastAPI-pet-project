@@ -1,6 +1,7 @@
 from sqlalchemy import select
-from core.db.sqlite.crud.db import new_session, TaskTable
-from api.models.schemas import TaskAdd, TasksOut
+from core.db.sqlite.session import get_session
+from core.db.sqlite.tables.task import TaskTable
+from api.models.task import TaskAdd, TasksOut
 
 
 # В классе создаем две функции: для добавления task и находжения всех tasks
@@ -8,9 +9,9 @@ class TaskRepository:
     @classmethod
     # создаем асинх функцию, в которую передаем параметры описанные в TaskAdd.
     # TaskAdd чтоб у нас сохранялась типизация и возвращаем task.id
-    async def add_one(cls, data: TaskAdd) -> int:
+    async def add_one_task(cls, data: TaskAdd) -> int:
         # создаем объект сессиии (session) к БД
-        async with new_session() as session:
+        async with get_session() as session:
             # приводим data к виду словарика
             task_dict = data.model_dump()
 
@@ -28,8 +29,8 @@ class TaskRepository:
 
 
     @classmethod
-    async def find_all(cls) -> list[TasksOut]:
-        async with new_session() as session:
+    async def get_all_tasks(cls) -> list[TasksOut]:
+        async with get_session() as session:
             query = select(TaskTable)
             # обратись (await) к БД через ссессию (session), исполнив (execute) запрос (query)
             result = await session.execute(query)
