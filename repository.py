@@ -1,6 +1,6 @@
 from sqlalchemy import select
 from db import new_session, TaskTable
-from schemas import TaskAdd, TasksOut
+from api.models.schemas import TaskAdd, TasksOut
 
 
 # В классе создаем две функции: для добавления task и находжения всех tasks

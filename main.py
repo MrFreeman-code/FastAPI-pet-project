@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 # asynccontextmanager — это декоратор из модуля contextlib в Python, который позволяет создавать асинхронные контекстные менеджеры.
-from router import router as tasks_router
+from api.routers.router import router as tasks_router
 from contextlib import asynccontextmanager
 from db import create_tables, delete_tables
 

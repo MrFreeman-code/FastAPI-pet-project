@@ -1,7 +1,7 @@
 # APIRouter — это класс из библиотеки FastAPI, который используется для организации и группировки маршрутов (routes)
 # и позволяет выносить группу роутов в отедльный файл router и потом его перемещать в main.py (всего через одну строчку)
 from fastapi import APIRouter, Depends
-from schemas import TaskAdd, TasksOut, TaskId
+from api.models.schemas import TaskAdd, TasksOut, TaskId
 from repository import TaskRepository
 from typing import Annotated
 
