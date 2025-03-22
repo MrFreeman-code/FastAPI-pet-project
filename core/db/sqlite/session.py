@@ -25,6 +25,7 @@ async def get_session():
     async with async_sessionmaker() as session:
         yield session
 
+
 # Функция для создания таблиц асинхронно, тк используем асинхронный драйвер aiosqlite
 async def create_tables():
     # https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html#synopsis-core

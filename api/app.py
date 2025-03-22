@@ -1,7 +1,7 @@
 from fastapi import FastAPI
+from api.routers import routers
 from contextlib import asynccontextmanager # asynccontextmanager — это декоратор из модуля contextlib в Python, который позволяет создавать асинхронные контекстные менеджеры.
 from core.db.sqlite.session import create_tables, delete_tables
-from api.routers.task import router as tasks_router
 
 from starlette.responses import RedirectResponse
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -19,7 +19,7 @@ async def lifespan(app: FastAPI):
     print("Shutdown")
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(tasks_router)
+app.include_router(routers)
 
 
 #  Middleware в FastAPI (и Starlette) позволяет вам обрабатывать запросы и ответы, добавляя дополнительную логику, такую как аутентификация, логирование или, в данном случае, перенаправление.
