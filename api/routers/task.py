@@ -11,7 +11,7 @@ router = APIRouter(prefix="/tasks", tags=["Tasks"])
 
 
 # Добавляется async, тк работа с БД в асинхронном режиме и ф-ии тоже долны быть асинхронны
-@router.post("", summary="Создать таску")
+@router.post("/add", summary="Создать таску")
 async def add_one_task(
     task: Annotated[TaskAdd, Depends()]
 ) -> TaskId:
@@ -19,7 +19,7 @@ async def add_one_task(
     return {"ok": True, "task_id": task_id}
 
 
-@router.get("", summary="Получить все таски")
+@router.get("/get-all", summary="Получить все таски")
 async def get_all_tasks() -> list[TasksOut]:
     tasks = await t.get_all_tasks()
     return tasks
