@@ -25,7 +25,14 @@ async def add_one_task(
 
 @router.get("/get-all", summary="Получить все таски")
 async def get_all_tasks(
-    current_user: Annotated[User, Depends(get_current_active_user)]
+    #current_user: Annotated[User, Depends(get_current_active_user)]
 ) -> list[TasksOut]:
     tasks = await t.get_all_tasks()
+    return tasks
+
+
+@router.get("/rout-for-tests", summary="Роут для тестирования разными способами!")
+async def rout_for_tests(
+) -> list:
+    tasks = []
     return tasks

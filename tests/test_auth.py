@@ -49,4 +49,3 @@ def test_token_success(client: TestClient):
     resource = client.post(url, headers=headers, data=data)
 
     return resource.status_code == status.HTTP_200_OK
-
