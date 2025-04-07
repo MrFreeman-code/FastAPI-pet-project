@@ -29,9 +29,11 @@ class TaskRepository:
 
 
     @classmethod
-    async def get_all_tasks(cls) -> list[TasksOut]:
+    async def get_all_tasks(cls,
+                            limit: int,
+                            offset: int) -> list[TasksOut]:
         async with get_session() as session:
-            query = select(TaskTable)
+            query = select(TaskTable).limit(limit).offset(offset)
             # обратись (await) к БД через ссессию (session), исполнив (execute) запрос (query)
             result = await session.execute(query)
             task_models = result.scalars().all()

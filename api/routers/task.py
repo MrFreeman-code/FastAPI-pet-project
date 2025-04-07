@@ -25,9 +25,11 @@ async def add_one_task(
 
 @router.get("/get-all", summary="Получить все таски")
 async def get_all_tasks(
-    #current_user: Annotated[User, Depends(get_current_active_user)]
+    current_user: Annotated[User, Depends(get_current_active_user)],
+    limit: int = 10, # кол-во записей
+    offset: int = 0  # сдвиг на N кол-во записей
 ) -> list[TasksOut]:
-    tasks = await t.get_all_tasks()
+    tasks = await t.get_all_tasks(limit, offset)
     return tasks
 
 

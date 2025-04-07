@@ -6,6 +6,6 @@ async def add_one_task(task):
     return  task_id
 
 
-async def get_all_tasks():
-    tasks = await TaskRepository.get_all_tasks()
+async def get_all_tasks(limit: int, offset: int):
+    tasks = await TaskRepository.get_all_tasks(limit, offset)
     return  tasks
