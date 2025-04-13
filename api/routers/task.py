@@ -7,6 +7,7 @@ from core.interlayer import task as t
 from api.models.task import TaskAdd, TaskId, TasksOut
 
 from api.models.auth import User
+from api.models.paginator import PaginatorParamsDepends
 from core.interlayer.auth import get_current_active_user
 
 # prefix у всей группы роутов будет одинаковый, и в tags прописываем название группый роутов
@@ -26,10 +27,9 @@ async def add_one_task(
 @router.get("/get-all", summary="Получить все таски")
 async def get_all_tasks(
     current_user: Annotated[User, Depends(get_current_active_user)],
-    limit: int = 10, # кол-во записей
-    offset: int = 0  # сдвиг на N кол-во записей
+    paginator: PaginatorParamsDepends
 ) -> list[TasksOut]:
-    tasks = await t.get_all_tasks(limit, offset)
+    tasks = await t.get_all_tasks(paginator.limit, paginator.offset)
     return tasks
 
 
